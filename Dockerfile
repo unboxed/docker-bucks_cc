@@ -38,6 +38,14 @@ RUN CHROME_VERSION="$(google-chrome --version)" \
     && chmod +x /usr/local/bin/chromedriver \
     && chromedriver --version
 
+# Install PhantomJS
+RUN PHANTOM_JS_VERSION="2.1.1" \
+    && export PHANTOM_JS="phantomjs-${PHANTOM_JS_VERSION}-linux-x86_64" \
+    && wget -q https://bitbucket.org/ariya/phantomjs/downloads/$PHANTOM_JS.tar.bz2 \
+    && tar xvjf $PHANTOM_JS.tar.bz2 \
+    && mkdir -p /root/.phantomjs/${PHANTOM_JS_VERSION} \
+    && mv $PHANTOM_JS /root/.phantomjs/${PHANTOM_JS_VERSION}/x86_64-linux
+
 WORKDIR /app
 
 CMD ["/bin/sh"]
